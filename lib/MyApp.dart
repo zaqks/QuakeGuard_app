@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> startChecker() async {
     Timer.periodic(const Duration(milliseconds: 1000), (Timer _) async {
       try {
-        vibration = await getVibration(ip);
+        vibration = await getVibration(ipInpt.ctrl.text);
         if (vibration) {
           playAlarm();
           _.cancel();
@@ -80,10 +80,10 @@ class _MyAppState extends State<MyApp> {
           }
           if (connected && vibration) {
             try {
-              await stopVibration(ip);
+              await stopVibration(ipInpt.ctrl.text);
               stopAlarm();
               //
-              vibration = await getVibration(ip);
+              vibration = await getVibration(ipInpt.ctrl.text);
               setState(() {});
               //
               await startChecker();
